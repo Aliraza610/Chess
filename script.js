@@ -32,10 +32,10 @@ function coloring() {
         a = aside + aup
 
         if (a % 2 == 0) {
-            color.style.backgroundColor = 'rgb(240, 201, 150)'
+            color.style.backgroundColor = 'rgb(223 158 133)'
         }
         if (a % 2 !== 0) {
-            color.style.backgroundColor = 'rgb(100, 75, 43)'
+            color.style.backgroundColor = 'rgb(199 201 60)'
         }
 
     })
@@ -405,5 +405,60 @@ document.querySelectorAll('.box').forEach(item => {
             whosTurn('B')
         }
         reddish()    
+
+
+        numOfKings = 0
+        document.querySelectorAll('.box').forEach(win => {
+            if (win.innerText == 'Wking' || win.innerText == 'Bking') {
+                numOfKings += 1
+            }
+
+        })
+
+        if (numOfKings == 1) {
+            setTimeout(() => { 
+                if (tog % 2 == 0) {
+                    alert('White Wins !!')
+                    location.reload()
+                }
+                else if (tog % 2 !== 0) {
+                    alert('Black Wins !!')
+                    location.reload()
+                }
+            }, 100)
+        }
     })    
+})
+
+// Moving the element
+document.querySelectorAll('.box').forEach(hathiTest => {
+    hathiTest.addEventListener('click', function () {
+        if (hathiTest.style.backgroundColor == 'pink') {
+            pinkId = hathiTest.id
+            pinkText = hathiTest.innerText
+
+            document.querySelectorAll('.box').forEach(hathiTest2 => {
+                hathiTest2.addEventListener('click', function () {
+                    if (hathiTest2.style.backgroundColor == 'green' && hathiTest2.innerText.length == 0) {
+                        document.getElementById(pinkId).innerText = ''
+                        hathiTest2.innerText = pinkText
+                        coloring()
+                        insertImage()
+
+                    }
+                })
+            })
+        }
+    })
+})
+
+// 
+z = 0
+document.querySelectorAll('.box').forEach(ee => {
+    ee.addEventListener('click', function () {
+        z = z + 1
+        if (z % 2 == 0 && ee.style.backgroundColor !== 'green') {
+            coloring()
+        }
+    })
 })
